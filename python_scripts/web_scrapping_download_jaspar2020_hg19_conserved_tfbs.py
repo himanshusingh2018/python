@@ -12,6 +12,9 @@ soup = BeautifulSoup(page.content, 'html.parser')
 #print(soup.find_all(class_="outer-text"))
 #print(soup.find_all(id="first"))
 
+#Write html file in text:
+with open("output1.txt", "w") as file:
+    file.write(str(soup))
 
 for a in soup.find_all('a', href=True):
     if(a['href'][0] == 'M'):
