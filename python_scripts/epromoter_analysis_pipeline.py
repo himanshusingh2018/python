@@ -330,6 +330,8 @@ class Genespromotertfbindingcluster:
                     count += 1
             gene_promoter_cluster_tf_binding_table = gene_promoter_cluster_tf_binding_table.append(pd.Series([gene_promoter_cluster_data_row[0],gene_promoter_cluster_data_row[1],gene_promoter_cluster_data_row[2],gene_promoter_cluster_data_row[3],gene_promoter_cluster_data_row[4],count],index=gene_promoter_cluster_tf_binding_table_columns), ignore_index = True)
 
+        gene_promoter_cluster_tf_binding_table['number of promoter binding TFs in cluster'] = np.where(gene_promoter_cluster_tf_binding_table['number of promoter binding TFs in cluster'] > gene_promoter_cluster_tf_binding_table['number of promoters per cluster'],
+                                                                                                       gene_promoter_cluster_tf_binding_table['number of promoters per cluster'],gene_promoter_cluster_tf_binding_table['number of promoter binding TFs in cluster'])
         gene_promoter_cluster_tf_binding_table.to_csv('output/tf_analysis/gene_promoter_cluster_tf_binding.table', sep='\t',index=False)
 
         gene_promoter_cluster_tf_binding_frequency_table = gene_promoter_cluster_tf_binding_table[gene_promoter_cluster_tf_binding_table.apply(lambda x: x['flag'] == 'U', axis=1)].groupby(['number of promoters per cluster', 'number of promoter binding TFs in cluster']).size().reset_index(name="Frequency")
