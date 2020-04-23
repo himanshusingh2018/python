@@ -11,8 +11,8 @@ def ensembl_refseq_gene_symbol(ensembl_gtf_file_weblink):
     df[0] = df[0].str.replace('"','')
     df[4] = df[4].str.replace('gene_name "','')
     df[4] = df[4].str.replace('"','')
-    df.columns = ['Ensembl_ID','Gene_Symbol']
-    df.drop_duplicates(subset ="Ensembl_ID", keep = False, inplace = True)
+    df.columns = ['ENSEMBL_ID','Gene_Symbol']
+    df.drop_duplicates(subset ="ENSEMBL_ID", keep = False, inplace = True)
 
     df.to_csv(ensembl_gtf_file_weblink.split('/')[-1].split('.')[1]+'.ensembl_to_refseq_gene_symbol.tsv',sep="\t",header=True,index=False)
     print("ENSEMBL ID to RefSeq Gene Symbol Conversion is completed...:\t\n"+os.getcwd()+'/'+ensembl_gtf_file_weblink.split('/')[-1].split('.')[1]+".ensembl_to_refseq_gene_symbol.tsv")
